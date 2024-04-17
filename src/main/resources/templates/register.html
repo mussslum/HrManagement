@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout" xmlns:th="http://www.w3.org/1999/xhtml">
+
+
+
+<div layout:fragment="content">
+    <section >
+        <style>
+            <!--        .main {
+                      padding: 0px 10px;
+                    }
+
+                    @media screen and (max-width: 450px) {
+                      .login-form{
+                        margin-top: 10%;
+                      }
+                      .register-form{
+                        margin-top: 10%;
+                      }
+                    }
+                    @media screen and (min-width: 768px){
+                      .main{
+                        margin-left: 30%;
+                      }
+
+                      .sidenav{
+                        width: 40%;
+                        position: fixed;
+                        z-index: 1;
+                        top: 0;
+                        left: 0;
+                      }
+                    }-->
+        </style>
+        <div class="main">
+            <h1>Register</h1>
+            <div class="col-md-6 col-sm-12">
+                <div th:if="${param.error}" class="alert alert-success">
+                    Invalid username and password.
+                </div>
+                <!--<div th:if="${param.logout}" class="alert alert-success">
+                    You have been logged out.</div>-->
+                <div class="login-form">
+                    <form method="post" th:action="@{/register}" th:object="${userDto}">
+                        <div class="form-group">
+
+                            <input
+                                    th:field="*{name}"
+                                    id="name"
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Name"
+                                    name="username">
+                        </div>
+                        <br>
+                        <div class="form-group">
+
+                            <input
+                            th:field="*{surname}"
+                            id="surname"
+                            type="text"
+                            class="form-control"
+                            placeholder="Surname"
+                            name="username">
+                        </div>
+                        <br>
+                        <div class="form-group">
+
+                            <input
+                                    th:field="*{username}"
+                                    id="username"
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Username"
+                                    name="username">
+                        </div>
+                        <br>
+                        <div class="form-group">
+
+                            <input
+                                    th:field="*{password}"
+                                    id="password"
+                                    type="password"
+                                    class="form-control"
+                                    placeholder="Password"
+                                    name="password">
+                        </div>
+                        <p>Select the programming languages you know below</p>
+                        <select th:field="*{skillId}" class="selectpicker"  data-live-search="true">
+                            <div th:each="skill :${skills}">
+                                <option th:value="${skill.id}" th:text="${skill.name}"></option>
+                            </div>
+                        </select>
+                        <a th:href="@{/login}">Do you have an account? Login here.</a>
+                        <button type="submit" value="Register" class="btn btn-secondary">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+</html>

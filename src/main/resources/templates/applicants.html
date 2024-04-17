@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout" xmlns:th="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content">
+    <table  class="table">
+        <thead>
+        <tr>
+            <th scope="col">Name <input type="text" placeholder="Search.."></th>
+            <th scope="col">Surname <input type="text" placeholder="Search.."></th>
+            <th scope="col">Username <input type="text" placeholder="Search.."></th>
+            <th scope="col">Skill <input type="text" placeholder="Search.."></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer: ${customers}">
+            <th th:text="${customer.user.name}">Muslum</th>
+            <td th:text="${customer.user.name}">Misirli</td>
+            <td th:text="${customer.user.username}">musslum</td>
+            <td th:text="${customer.skill.name}">Java</td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+
+
+</html>

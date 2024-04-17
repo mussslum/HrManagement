@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout" xmlns:th="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content">
+    <section >
+        <style>
+            <!--        .main {
+                      padding: 0px 10px;
+                    }
+
+                    @media screen and (max-width: 450px) {
+                      .login-form{
+                        margin-top: 10%;
+                      }
+                      .register-form{
+                        margin-top: 10%;
+                      }
+                    }
+                    @media screen and (min-width: 768px){
+                      .main{
+                        margin-left: 30%;
+                      }
+
+                      .sidenav{
+                        width: 40%;
+                        position: fixed;
+                        z-index: 1;
+                        top: 0;
+                        left: 0;
+                      }
+                    }-->
+        </style>
+
+        <div class="main">
+            <h1>Create new Vacancy</h1>
+            <div class="col-md-6 col-sm-12">
+                <div th:if="${param.error}" class="alert alert-success">
+                    Invalid adsdads
+                </div>
+                <!--<div th:if="${param.logout}" class="alert alert-success">
+                    You have been logged out.</div>-->
+                <div class="login-form">
+                    <form method="post"  th:object="${vacancyDto}">
+                        <div class="form-group">
+
+                            <input
+                                    th:field="*{title}"
+                                    id="name"
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Title"
+                                    name="username">
+                        </div>
+                        <br>
+                        <div class="form-group">
+
+                            <input
+                                    th:field="*{description}"
+                                    id="surname"
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Description"
+                                    name="username">
+                        </div>
+                        <br>
+                        <div class="form-group">
+
+                            <input
+                                    th:field="*{requirement}"
+                                    id="username"
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Requirement"
+                                    name="username">
+                        </div>
+                        <button type="submit" value="Register" class="btn btn-secondary">Create</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+</html>
