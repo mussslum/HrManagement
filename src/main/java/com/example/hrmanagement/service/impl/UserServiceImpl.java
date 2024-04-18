@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -22,13 +24,12 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
     @Override
     public void createUser(UserEntityDto userEntityDto) {
-        /*if(userRepository.existsByUsername(userEntityDto.getUsername()))
+        if(!userRepository.existsByUsername(userEntityDto.getUsername()))
         {
-
-        }*/
-        userEntityDto.setPassword(passwordEncoder.encode(userEntityDto.getPassword()));
-        UserEntity user =modelMapper.map(userEntityDto,UserEntity.class);
-        userRepository.save(user);
+            userEntityDto.setPassword(passwordEncoder.encode(userEntityDto.getPassword()));
+            UserEntity user =modelMapper.map(userEntityDto,UserEntity.class);
+            userRepository.save(user);
+        }
     }
 
     @Override
@@ -40,20 +41,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntityDto findUserById(int id) {
-        UserEntity user = userRepository.findById(id).get();
-        UserEntityDto userDto = modelMapper.map(user,UserEntityDto.class);
-        return userDto;
+        Optional<UserEntity> optionalUser= userRepository.findById(id);
+        UserEntityDto userEntityDto=null;
+        if(optionalUser.isPresent())
+        {
+            userEntityDto =modelMapper.map(optionalUser,UserEntityDto.class);
+        }
+        return userEntityDto;
     }
 
     @Override
     public void updateUser(UserEntityDto userEntityDto, int id) {
-        UserEntity user = userRepository.findById(id).get();
-        user.setName(userEntityDto.getName());
-        user.setSurname(userEntityDto.getSurname());
-        user.setUsername(userEntityDto.getUsername());
-        user.setPassword(userEntityDto.getPassword());
-        /*user=modelMapper.map(userEntityDto,UserEntity.class);*/
-        userRepository.save(user);
+        Optional<UserEntity> user = userRepository.findById(id);
+        if(user.isPresent())
+        {
+            user.get().setName(userEntityDto.getName());
+            user.get().setSurname(userEntityDto.getSurname());
+            user.get().setUsername(userEntityDto.getUsername());
+            user.get().setPassword(userEntityDto.getPassword());
+            userRepository.save(user.get());
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.hrmanagement.controller;
 
+import com.example.hrmanagement.dto.UserEntityDto;
 import com.example.hrmanagement.dto.VacancyDto;
 import com.example.hrmanagement.model.Customer;
 import com.example.hrmanagement.model.Hr;
@@ -58,11 +59,9 @@ public class HomeController {
     @GetMapping("/video")
     public String video(ModelMap modelMap)
     {
-        /*if(userRepository.existsByUsername("muslum")){
-            UserEntity user = userRepository.findByUsername("muslum").get();
-            userRepository.delete(user);
-        }*/
-        /*modelMap.addAttribute("user",user);*/
+        /*
+        Test ucun var bu controller
+         */
         return "video";
     }
     @GetMapping("apply/{id}")

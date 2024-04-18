@@ -45,21 +45,21 @@ public class VacancyController {
         modelMap.addAttribute("vacancyDtos",vacancyDtos);
         return "allVacancies";
     }
-    @GetMapping("createVacancy")
+    @GetMapping("create")
     public String getVacancy(ModelMap modelMap)
     {
         VacancyDto vacancyDto = new VacancyDto();
         modelMap.addAttribute("vacancyDto",vacancyDto);
         return "createVacancy";
     }
-    @PostMapping("createVacancy")
+    @PostMapping("create")
     public String postVacancy(@ModelAttribute("vacancyDto") VacancyDto vacancyDto)
     {
         vacancyDto.setHr(getCurrentHr());
         vacancyService.createVacancy(vacancyDto);
         return "redirect:/vacancy/all";
     }
-    @GetMapping("deleteVacancy/{id}")
+    @GetMapping("delete/{id}")
     public String deleteVacancy(@PathVariable("id") int id)
     {
         vacancyService.deleteVacancy(id);

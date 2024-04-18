@@ -31,11 +31,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> {
                             auth.requestMatchers("/home/main").permitAll();
                             auth.requestMatchers("/register").permitAll();
-                            auth.requestMatchers("/vacancy/all").hasAuthority("hr");
+                            auth.requestMatchers("/vacancy/*").hasAuthority("hr");
                             auth.requestMatchers("/home/apply/{id}").hasAuthority("user");
-                            /*auth.requestMatchers("/vacancy/all").permitAll();
-                            auth.requestMatchers("/vacancy/createVacancy").permitAll();
-                            auth.requestMatchers("/vacancy/deleteVacancy/{id}").permitAll();*/
                             auth.anyRequest().authenticated();
                         }
 

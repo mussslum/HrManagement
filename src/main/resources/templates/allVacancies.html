@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="_layout" xmlns:th="http://www.w3.org/1999/xhtml">
 <div  layout:fragment="content">
-    <a type="button" th:href="@{/vacancy/createVacancy}" class="btn btn-success">Create a new Vacancy</a>
+    <a type="button" th:href="@{/vacancy/create}" class="btn btn-success">Create a new Vacancy</a>
     <div class="d-flex">
         <div th:each="vacancyDto: ${vacancyDtos}" >
             <div class="card m-2" style="width: 18rem;">
@@ -14,8 +14,8 @@
                     <p th:text="${vacancyDto.requirement}"></p>
                     <a type="button" th:href="@{/vacancy/applicants/{id}(id=${vacancyDto.id})}" class="btn btn-info">See the Applicants</a>
                     <br><br>
-                    <a type="button" class="btn btn-warning">Update</a>
-                    <a th:href="@{/vacancy/deleteVacancy/{id}(id=${vacancyDto.id})}" type="button"  class="btn btn-danger">Delete</a>
+                    <!--<a type="button" class="btn btn-warning">Update</a>-->
+                    <a th:href="@{/vacancy/delete/{id}(id=${vacancyDto.id})}" type="button"  class="btn btn-danger">Delete</a>
                 </div>
             </div>
         </div>

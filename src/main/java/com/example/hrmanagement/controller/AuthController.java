@@ -49,47 +49,15 @@ public class AuthController {
         modelMap.addAttribute("userDto",userDto);
         List<Skill> skills = skillRepository.findAll();
         modelMap.addAttribute("skills",skills);
-
-        /*Hr hr = new Hr();
-        UserEntity user= new UserEntity();
-        user.setName("Test");
-        user.setSurname("Testov");
-        user.setUsername("tesst");
-        user.setPassword("te123");
-        Role role = roleRepository.findByRolename("user").get();
-        user.setRoles(Collections.singletonList(role));
-        hr.setUser(user);
-        hrRepository.save(hr);*/
-
-
-        /*Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String name = authentication.getName();
-        UserEntity user=userRepository.findByUsername(name).get();
-        Hr hr=hrRepository.findByUserId(user.getId()).get();
-        System.out.println(hr);*/
-
-        /*UserEntityDto userEntityDto= new UserEntityDto();
-        userEntityDto.setName("Emin");
-        userEntityDto.setSurname("Narimanli");
-        userEntityDto.setUsername("eminnn");
-        userEntityDto.setPassword("555");*/
-
-        /*userService.createUser(userEntityDto);*/
-
-        /*List<UserEntityDto> users = userService.findAllUser();
-        for (int i =0 ; i <users.size(); i++)
-        {
-            System.out.println(users.get(i));
-        }*/
-
-        /*userService.deleteUser(9);*/
-
-
         return "register";
     }
     @PostMapping("/register")
     public String registerPost(@ModelAttribute("userDto") UserEntityDto userDto)
     {
+        if(userService.existsOrNotByUsername(userDto.getUsername()))
+        {
+            return "redirect:register?error";
+        }
         String roleName="user";
         Role role = roleRepository.findByRolename(roleName).get();
         userDto.setRoles(Collections.singletonList(role));
